@@ -1,0 +1,44 @@
+<template name="newaidesoignant">
+    <div class="ui container">
+        <div class="panel-body">
+            <div class="ui form ">
+    
+             {{#autoForm collection="AideSoignants" id="asform"  type="insert"  method="ajoutAidesoignant"
+              omitFields="dernierAppel, addedBy, updatedAt, createdAt" resetOnSuccess=true}}
+    
+                       <div class="ui three fields segment field">
+                         <div class=" field">
+                           {{> afQuickField name='nom'}}
+                         </div>
+                         <div class=" field">
+                            {{> afQuickField name='prenom'}}
+                          </div>
+                         <div class=" field">
+                           {{> afQuickField name='telephone'}}
+                         </div>
+                         
+                       </div>
+                    <div class="ui three fields segment field">
+                       <div class=" field">
+                         {{> afQuickField name='specialite'}}
+                       </div>
+                       <div class=" field">
+                        {{> afQuickField name='disponible'}}
+                      </div>
+                      <div class=" field">
+                        {{> afQuickField name='dernierAppel'}}
+                      </div>
+                    </div>
+                    <div class="eight wide field ">
+                        {{> afQuickField name='localisation'}}
+                    </div>
+                     <div class="ui segment">
+                       <input type="submit" class="ui button teal" value="Insert"/>
+                     </div>
+    
+               {{/autoForm}}
+             </div>
+           </div>
+                
+    </div>
+</template>

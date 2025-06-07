@@ -1,0 +1,108 @@
+<template name="searchEtablissements">
+    <div class="ui container" style="margin-top: 30px">
+        <div class="loginbox center aligned" style="border-radius:2px;">
+            <h2 style="color:#ccc; border-radius: 3px; font-family: 'Open Sans', sans-serif; "></h2>
+                 <img src="/monlogofin.png"  alt="MyDirectory" class="img-responsive">
+          </div>
+          <br>
+
+      <h2 class="ui header">Recherchez un établissement sanitaire</h2>
+      <form class="ui form" id="search-form">
+        <div class="fields">
+            <div class="twelve wide field">
+                <input type="text" name="searchQuery" placeholder="Designation..." required>
+            </div>
+            <div class="six wide field">
+                <select class="ui dropdown" name="typeSelect" id="typeSelect">
+                    
+                 <!-- {{#each categories}}
+                        <option value="{{this}}">{{this}}</option>
+                      {{/each}} -->
+                    <option value=''>-- Toutes les catégories --</option>
+                    <option value='Hopital'>Hopital</option>
+                    <option value='Clinique'>Clinique</option>
+                    <option value='Centre de santé'>Centre de santé</option>
+                    <option value='Dispensaire'>Dispensaire</option>
+                    <option value='Laboratoire d’analyses'>Laboratoire d’analyses</option>
+                    <option value='Centre de diagnostic'>Centre de diagnostic</option>
+                    <option value='Centre de santé intégré'>Centre de santé intégré</option>
+                    <option value='Hôpital de district'>Hôpital de district</option>
+                    <option value='Centre d’imagerie'>Centre d’imagerie</option>
+                    <option value='Centre ophtalmologique'>Centre ophtalmologique</option>
+                    <option value='Maternité'>Maternité</option>
+                    <option value='Cabinet médical'>Cabinet médical</option>
+                    <option value='Cabinet dentaire'>Cabinet dentaire</option>
+                    <option value='Centre de rééducation'>Centre de rééducation</option>
+                    <option value='Autre'>Autre</option>
+            <!-- Ajoute d'autres catégories selon ta base -->
+                </select>
+            </div>
+            <div class="four wide field">
+                <select class="ui dropdown" name="region" id="regionSelect">
+                    <option value="">-- Tri par region --</option>
+                    {{#each regions}}
+                            <option value="{{this}}">{{this}}</option>
+                          {{/each}}
+                </select>
+            </div>
+            <div class="ui buttons">
+                <button class="ui primary button" type="submit">Rechercher</button>
+                <div class="or"></div>
+                <button class="ui button" type="button" id="reset-form">Réinitialiser</button>
+              </div>
+            </div>
+        </form>
+  
+      <div class="ui container results">
+       {{#if searchResults.length}} 
+        <div class="ui cards stackable three columns grid center row " >
+         {{#each searchResults}}
+            <div class="ui column" style="padding-bottom: 10px;">
+                <div class="header" style="background-color:#F0F3F4; border-radius: 3px;border:4px ; border-color:#34495E">
+                    <h3 style="color:#10894E; padding: 18px 18px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+                      <span class="glyphicon glyphicon-plus pull-left" id="brand"></span><strong>{{type}}</strong>
+                      <span class="pull-right"></span></h3>
+                </div>
+                    <div class="content" >
+                      
+                          <h3 class="h3-responsive" style="color:#10894E; padding: 10px 10px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+                            <i class="thumbtack icon"></i>Raison sociale:&nbsp;{{nom}}</h3>
+
+                    </div><br>
+                    <div class="content">
+                        <h4>Ville & Quartier :&nbsp;<a class="summary">{{ville}} &nbsp; {{quartier}}</a></h4>
+                        
+                      </div><br>
+
+                      <hr>
+                    
+                      <div class="extra content">
+                        <div class="ui two buttons show-details">
+                        
+                            <a href="/" type="button" class="ui button button default column">Autres similaires</a>
+                            <a href="https://wa.me/{{telephone}}" class="ui button button positive column" target="_blank">
+                                Phone&nbsp;<i class="phone icon"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+                
+      </div>
+     
+
+     {{else}}
+          <p>Aucun résultat trouvé.</p>
+      {{/if}} 
+    </div>
+     <!-- Pagination -->
+     <div class="ui center aligned basic segment">
+        <div class="ui buttons">
+          <button class="ui button" id="prev-page" {{disabledPrev}}>Précédent</button>
+          <div class="or"></div>
+          <button class="ui button" id="next-page" {{disabledNext}}>Suivant</button>
+        </div>
+        <div style="margin-top: 10px;">Page actuelle : <strong>{{currentPage}}</strong></div>
+      </div>
+    </div>
+</template>
+  

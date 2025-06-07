@@ -1,0 +1,19 @@
+{
+  "name": "QUICKPARM",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.36",
+    "bcrypt": "^1.0.3",
+    "bootstrap-icons": "^1.13.1",
+    "materialize-css": "^1.0.0",
+    "meteor-node-stubs": "^0.3.2",
+    "node-pre-gyp": "^0.14.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "semantic-ui-react": "^2.1.5",
+    "simple-schema": "^1.1.0"
+  }
+}

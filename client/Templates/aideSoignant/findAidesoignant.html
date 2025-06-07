@@ -1,0 +1,182 @@
+<template name="findAidesoignant">
+  <div class="container">
+    <div class="container massive message" style="margin-top: 30px">
+        <div class="loginbox center aligned" style="border-radius:2px;">
+            <h2 style="color:#ccc; border-radius: 3px; font-family: 'Open Sans', sans-serif; "></h2>
+                 <img src="/monlogofin.png"  alt="MyDirectory" class="img-responsive">
+          </div>
+          <br>
+
+      <h2 class="ui header">Recherchez de  l'assistance sanitaire</h2>
+      <form class="ui form" id="search-form">
+        <div class="fields">
+            <div class="twelve wide field">
+                <input type="text" name="searchQuery" placeholder="{{getGlobal 'searchAidesoignant'}}" required>
+            </div>
+            <div class="six wide field">
+                <select class="ui dropdown" name="dispoSelect" id="dispoSelect">
+                    
+                    {{#each disponibilites}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                    
+            <!-- Ajoute d'autres specialites selon ta base -->
+                </select>
+            </div>
+            <div class="four wide field">
+                <h4><strong>Evaluation de la distance</strong></h4>
+                <div class="ui buttons">
+                <button class="ui primary button show-road" data-toggle="modal" data-target="#myRoadModal">Afficher</button>
+              </div>
+            </div>
+            </div>
+            <div class="ui buttons">
+                <button class="ui primary button" type="submit">Rechercher</button>
+                <div class="or"></div>
+                <button class="ui button" type="button" id="reset-form">Réinitialiser</button>
+              
+            </div>
+        </form>
+    </div>
+      <div class="ui container results">
+       {{#if searchResults.length}} 
+        <div class="ui cards stackable three columns grid center row " >
+         {{#each searchResults}}
+            <div class="ui column">
+                    <div class="header" style="background-color:#F0F3F4; border-radius: 3px;border:4px ; border-color:#34495E">
+                        <h4 style="color:#10894E; padding: 18px 18px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+                          <span class="glyphicon glyphicon-plus pull-left" id="brand"></span><!--{{getGlobal 'shoptype'}}-->
+                          <span class="pull-right">{{specialite}}</span></h4>
+                    </div>
+                    <div class="ui small feed">
+                      <div class="event">
+                        <div class="content">
+                          <div class="summary">
+                            <h5> <i class="user md icon"></i> &nbsp;<a>{{nom}}&nbsp;{{prenom}}</a> </h5>
+                            <hr>
+                            <h5><i class="map marker alternate icon"></i>
+                            &nbsp;<a>Localisation</a>
+                            </h5>
+                            {{#if localisation}}
+                            Latitude : {{localisation.lat}}, Longitude : {{localisation.lng}}
+                            {{else}}
+                            Non renseignée
+                            {{/if}}
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="event">
+                        <div class="content">
+                          <div class="summary">
+                            <h4><i class="unlock icon"></i>&nbsp;{{disponible}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                        <div class="extra content">
+                          <div class="ui two buttons show-details'">
+                            <!-- {{#if isInRole 'basic'}} -->
+                            <a class="inverted item" href="#" role="button" onclick="return show('Cart','Main');" data-toggle="modal" data-target="#myCartModal1">
+                              <i class="cart icon"></i>
+                            </a>                            
+                            <div class="ui default button show-details" role="button"
+                                data-nom="{{nom}}" 
+                                data-prenom="{{prenom}}" 
+                                data-specialite="{{specialite}}" 
+                                data-disponible="{{disponible}}" 
+                                data-telephone="{{telephone}}" data-toggle="modal" data-target="#myDetailsModal">Details</div>
+                            <div class="ui basic green button"><a href="https://wa.me/{{telephone}}" target="_blank">
+                              <i class="phone icon"></i>
+                            </a></div>
+                            <!-- {{/if}} -->
+                          </div>
+                        </div>
+                      </div>
+                    </div> 
+            {{/each}}
+                
+      </div>
+     
+
+     {{else}}
+          <p>Aucun résultat trouvé.</p>
+      {{/if}} 
+    </div>
+     <!-- Pagination -->
+     <div class="ui center aligned basic segment">
+        <div class="ui buttons">
+          <button class="ui button" id="prev-page" {{disabledPrev}}>Précédent</button>
+          <div class="or"></div>
+          <button class="ui button" id="next-page" {{disabledNext}}>Suivant</button>
+        </div>
+        <div style="margin-top: 10px;">Page actuelle : <strong>{{currentPage}}</strong></div>
+      </div>
+    
+</div>
+     <div class="modal fade" id="myDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myDetailsModal">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+        
+            <div class="modal-header">
+              <h3><b>Informations du personnel soignant</b></h3>
+            </div>
+            
+            <div class="modal-body">
+              <div class=" ui cards">
+                <div class="teal card">
+                  <div class="image">
+                    <img src="/garde.jpg" alt="healthsupport" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <p><strong>Nom :</strong> <span id="modalNom"></span></p>
+              <p><strong>Prénom :</strong> <span id="modalPrenom"></span></p>
+              <p><strong>Spécialité :</strong> <span id="modalSpecialite"></span></p>
+              <p><strong>Disponible :</strong> <span id="modalDisponible"></span></p>
+              <p><strong>Téléphone :</strong> <span id="modalTelephone"></span></p>
+            </div>
+          
+          <div class="modal-footer inline-block">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            
+          </div>
+  
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myRoadModal" tabindex="-1" role="dialog" aria-labelledby="myRoadModal">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+        
+            <div class="modal-header">
+              <h3><b><title>Carte Itinéraire</title></b></h3>
+              <div class=" ui cards">
+                Point de depart
+                <p id="helpLat"></p>
+                <p id="helpLng"></p>
+              </div>
+            </div>
+            
+            <div class="modal-body">
+              <div class=" ui cards">
+               <div style="height: 500px;" id="map"></div>
+                <p id="distance"></p>
+                <p id="duration"></p>
+              </div>
+            </div>
+          
+          <div class="modal-footer inline-block">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            
+          </div>
+  
+        </div>
+      </div>
+    </div>
+</template>
+<template name="mapTemplate">
+  <div style="height: 500px;" id="map"></div>
+  <p id="distance"></p>
+  <p id="duration"></p>
+</template>

@@ -1,0 +1,105 @@
+<template name="searchMedicaments">
+    <div class="ui container" style="margin-top: 30px">
+        <div class="loginbox center aligned" style="border-radius:2px;">
+            <h2 style="color:#ccc; border-radius: 3px; font-family: 'Open Sans', sans-serif; "></h2>
+                 <img src="/monlogofin.png"  alt="MyDirectory" class="img-responsive">
+          </div>
+          <br>
+
+      <h2 class="ui header">Recherche de Médicaments</h2>
+      <form class="ui form" id="search-form">
+        <div class="fields">
+            <div class="twelve wide field">
+                <input type="text" name="searchQuery" placeholder="Nom du médicament..." required>
+            </div>
+            <div class="six wide field">
+                <select class="ui dropdown" name="categorieSelect" id="categorieSelect">
+                    
+                 <!-- {{#each categories}}
+                        <option value="{{this}}">{{this}}</option>
+                      {{/each}} -->
+                    <option value=''>-- Toutes les catégories --</option>
+                    <option value='Antibiotiques'>Antibiotique</option>
+                    <option value='Antifongiques'>Antifongique</option>
+                    <option value='Antalgiques'>Antalgique</option>
+                    <option value='Antipaludeens'>Antipaludéens</option>
+                    <option value='Antiparasitaires'>Antiparasitaires</option>
+                    <option value='Antiacides'>Antiacides</option>
+                    <option value='Antidiabetiques'>Antidiabétiques</option>
+                    <option value='Antitoussifs'>Antitoussifs</option>
+                    <option value='Antihemorragiques'>Antihémorragiques</option>
+                    <option value='Antihelmintiques'>Antihelmintiques</option>
+                    <option value='Antiagregants'>Antiagrégants</option>
+                    <option value='Antianémiques'>Antianemiques</option>
+                    <option value='Antiasteniques'>Antiasténiques</option>
+                    <option value='Diuretiques'>Diurétiques</option>
+                    <option value='Antifongiques'>Antifongique</option>
+            <!-- Ajoute d'autres catégories selon ta base -->
+                </select>
+            </div>
+            <div class="four wide field">
+                <select class="ui dropdown" name="priceOrder">
+                    <option value="">-- Tri par prix --</option>
+                    <option value="asc">Prix croissant</option>
+                    <option value="desc">Prix décroissant</option>
+                </select>
+            </div>
+            <div class="ui buttons">
+                <button class="ui primary button" type="submit">Rechercher</button>
+                <div class="or"></div>
+                <button class="ui button" type="button" id="reset-form">Réinitialiser</button>
+              </div>
+            </div>
+        </form>
+  
+      <div class="ui container results">
+        {{#if searchResults.length}}
+        <div class="ui divided items stackable row " >
+         {{#each searchResults}}
+            <div class="ui list-item loginbox col-sm-6 col-md-4" style="padding-bottom: 10px;">
+                <div class="header" style="background-color:#F0F3F4; border-radius: 3px;border:4px ; border-color:#34495E">
+                    <h4 style="color:#10894E; padding: 18px 18px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+                      <span class="glyphicon glyphicon-plus pull-left" id="brand"></span><!--{{getGlobal 'shoptype'}}-->{{brand}}
+                      <span class="pull-right">{{currency price}}</span></h4>
+                </div>
+                    <div class="content" >
+                      <h5 style="color:#10894E; padding: 10px 10px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+                        {{truncate desc}}</h5>
+                          <h2 class="h4-responsive"><i class="glyphicon glyphicon-map-marker ">Pharmacie:&nbsp;</i>{{showlocation fileShopId}}{{location}}</h2>
+
+                    </div><br>
+                    <div class="content">
+                        <h4>Ordonnance exigée:&nbsp;<a class="summary">{{onpresc}}</a></h4>
+                        
+                      </div><br>
+
+                      <hr>
+                    <div class="ui extra content ">
+                      <div class="ui buttons show-details">
+                      <!-- {{#if isInRole 'basic'}} -->
+                      <a href="{{pathFor route='compare'}}" type="button" class="ui button button small negative pull-right "  name="button">Comparer</a>
+                      <!-- {{/if}} -->
+                       </div>
+                    </div>
+                </div>
+            {{/each}}
+                
+      </div>
+     
+
+      {{else}}
+          <p>Aucun résultat trouvé.</p>
+      {{/if}}
+    </div>
+     <!-- Pagination -->
+     <div class="ui center aligned basic segment">
+        <div class="ui buttons">
+          <button class="ui button" id="prev-page" {{disabledPrev}}>Précédent</button>
+          <div class="or"></div>
+          <button class="ui button" id="next-page" {{disabledNext}}>Suivant</button>
+        </div>
+        <div style="margin-top: 10px;">Page actuelle : <strong>{{currentPage}}</strong></div>
+      </div>
+    </div>
+  </template>
+  

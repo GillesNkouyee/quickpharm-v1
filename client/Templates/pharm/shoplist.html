@@ -1,0 +1,255 @@
+<template name="shoplist">
+	<div class="ui container">
+		<!-- <ul>
+			{{#each shops}}
+			  <li>{{shopname}} - {{shopadress}}</li>
+			  <li><a class="ui green ribbon label {{pharmstatusClass}} ">De garde</a></li>
+			  <li>{{shopcategory}}</li>
+			{{/each}}
+		  </ul>
+		
+		  <button class="prev-page">Précédent</button>
+		  <span>Page {{page}}</span>
+		  <button class="next-page">Suivant</button> -->
+
+	<div class="ui stackable grid center" id="regionitem">
+
+	        <!-- {{#transition in="zoomIn:500" out="bounceOut:2000"}} -->
+					<div class="twelve wide  column shoplistbox">
+						<div class="ui header "><h3 ><i class="home icon"></i>{{getGlobal 'shoptypeheader'}}</h3>
+							
+						</div>
+						<div class="ui divider">
+							
+						</div>
+						<div class="ui cards stackable three columns grid center row " id="regionitem" style="background-image:url(bldrugstore.jpg)">
+						{{#if listItem}}
+						<!-- <div class="row"> -->
+		          {{#each shops}}
+				  <div class="ui card">
+					
+					<div class="content">
+						<a class="ui green ribbon label {{pharmstatusClass}} ">De garde</a>
+					  <div class="center aligned header">
+						
+						<h3 class="title">{{shopname}}</h3>
+							
+						<!-- <img src="{{affichage shoplogo}}{{myurl}}" class="img-responsive logo" alt=""> -->
+					</div>
+					</div>
+					  <div class="center aligned description">
+						<p>
+							
+							<h3 class="title"><i class="marker alternate icon"></i>{{shopadress}}</h3>					
+
+							<!-- <h3 class="sub_title"> {{shopslogan}}</h3> -->
+						</p>
+					  </div>
+					
+					<div class="extra content">
+						
+					  <div class="center aligned author">
+						<a href="#"  role=button class="upvotable btn-primary btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a>
+						       <a  href="#" role="button">{{votes}}<span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+								<a href="{{pathFor route='shopinfo'}}" data-toggle="tooltip" title="Allez a notre espace!"  data-placement="left" class="button btn-warning btn-sm">
+									<i class="picture icon" aria-hidden="true"></i>
+								</a>
+								<span class="comments"><i class="fa fa-comments"></i><a href="#">{{> count}}</a></span>
+								<a href="#" class="button btn-sm btn-info "><span class="glyphicon glyphicon-paperclip"></span> {{> ArticleCount}}</a>
+
+					  </div>
+					  <h2 class="sub_title">{{> shareit}}</h2>
+					</div>
+				</div>
+		
+					{{/each}}
+				<!-- </div> -->
+				
+					 <div class="twelve wide  column">
+					 <!-- <button id="load"  type="button btn-md btn-success" name="button">Show More</button> -->
+					 <a href="#top" class="totop glyphicon glyphicon-arrow-up" role="button"></a>
+					 </div>
+					 {{else}}
+					 <div class=" ui page noitembox ">
+					 {{> notFound}}
+					 </div>
+					 	{{/if}}
+					</div>
+					<div class="ui divider"></div>
+				<div class="extra content">
+					<div class="ui buttons">
+						<button class="prev-page ui labeled icon button">
+							<i class="left chevron icon"></i>
+							Back
+						  </button>
+						<div class="ui button disabled"><span>Page {{page}}</span></div>
+						
+						<button class="next-page ui right labeled icon button">
+							<i class="right chevron icon"></i>
+							Next
+						  </button>
+					</div>
+				</div>
+				</div>
+				
+
+					<div class="four wide  column loginbox">
+
+								{{> searchshop}}
+
+					</div>
+
+	</div>
+</div>
+<div class="ui container">
+	<div class="ui page ">
+			{{> map}}
+	</div>
+</div>
+</template>
+	<template name="categories">
+		<div class="title">categories</div>
+
+		<div id="categories" class="btn-group ">
+			{{#each shopcategory}}
+			<div class="category btn btn-default">
+			{{category}}
+			</div>
+			{{/each}}
+		</div>
+	</template>
+	<template name="searchshop">
+
+		<div class=" six wide stackable columns ">
+			<div class="card text-xs-center column">
+				<div class="card-header " style=" border-radius: 3px;">
+						<h3 style="color:#ccc; padding: 18px 18px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+							<i class="search icon"></i>{{getGlobal 'shoptype'}}</h3>
+				</div>
+				<div class="panel-body">
+
+
+				<div class="two fields " id="cats-form">
+	              <div class="error"></div>
+	              <input class="form-control" name="shopstyle" id="shopstyle"
+	              placeholder="Categorie" type="text" required=""/>
+              </div>
+							<br>
+              <div class="two fields " id="time-form1">
+	              <div class="error"></div>
+	              <input class="form-control" name="shopadress"
+	              placeholder="Adresse..." type="text" required=""/>
+              </div>
+							<br>
+              <div class="two fields " id="time-form2">
+	              <!-- <div class="error"></div>
+					<label for="garde" data-toggle="tooltip" title="Saisir OUI pour afficher les pharmacies de garde"  data-placement="left">Statut</label>
+	              <input class="form-control " name="garde"
+	              placeholder="Pharmacie de garde" type="text" required=""/> -->
+				  <label for="garde" data-toggle="tooltip" title="Saisir OUI pour afficher les pharmacies de garde" data-placement="left">
+					Statut de garde
+				  </label>
+				  
+				  <div class="form-check">
+					<input class="form-check-input" type="radio" name="garde" id="gardeOui" value="OUI">
+					<label class="form-check-label" for="gardeOui">Oui</label>
+				  </div>
+				  
+				  <div class="form-check">
+					<input class="form-check-input" type="radio" name="garde" id="gardeNon" value="NON">
+					<label class="form-check-label" for="gardeNon">Non</label>
+				  </div>
+				  <div class="form-check">
+					<input class="form-check-input" type="radio" name="garde" id="gardeTous" value="" checked>
+					<label class="form-check-label" for="gardeTous">Tous</label>
+					</div>
+              </div>
+							<!-- {{> filter}} -->
+						</div>
+							<!-- {{> ecommerceFramwork}} -->
+			</div>
+			<div class=" card text-xs-center column">
+				<div class="panel-body subtheme" style=" border-radius: 3px;">
+						<h3 style="color:#ccc; padding: 18px 18px 20px; border-radius: 7px; font-family: 'Open Sans', sans-serif; ">
+							<i class="mail icon"></i>Ecrivez-nous!</h3>
+				</div>
+	    <div class="card-block thumbnail">
+	        	        <a class="btn btn-default"><img class="" src="/monlogofin.svg"></a>
+	    </div>
+	    <div class="card-footer text-muted default-color-dark-text">
+	        <p></p>
+	    </div>
+	</div>
+
+		</div>
+
+</template>
+<template name="map">
+	<div class="container">
+	  <h2>Carte des Pharmacies</h2>
+  
+	  <div class="form-group">
+		<label for="ville">Filtrer par ville :</label>
+		<select id="ville" class="form-control">
+		  <option value="ALL">Toutes les villes</option>
+		  {{#each uniqueCities}}
+			<option value="{{this}}">{{this}}</option>
+		  {{/each}}
+		</select>
+	  </div>
+  
+	  <div id="searchMapContainer" style="width: 100%; height: 500px; border: 1px solid #ccc;"></div>
+	</div>
+  </template>
+  
+<!--  <template name="map">
+	<div class="container">
+		<h2>Carte des Pharmacies</h2>
+		<div class="form-group">
+			<label for="ville">Filtrer par ville :</label>
+			<select id="ville" class="form-control">
+			  <option value="ALL">Toutes les villes</option>
+			  {{#each uniqueCities}}
+				<option value="{{this}}">{{this}}</option>
+			  {{/each}}
+			</select>
+		  </div>
+		<label for="ville">Filtrer par ville :</label>
+												<select id="ville" name="filtermarker" class="btn btn-cyan btn-sm">
+												    <option value="">Select a region</option>
+														<option value="all">ALL</option>
+												    <option value="Douala">Douala</option>
+												    <option value="Yaounde">Yaoundé</option>
+														<option value="Garoua">Garoua</option>
+														<option value="Bafoussam">Bafoussam</option>
+												</select>
+				
+
+										{{#unless geolocationError}}
+				 								<div class="map-canvas" id="searchMapContainer">
+				 									{{> googleMap name="map" options="options"}}
+				 							</div>
+				 									{{else}}
+				 									 Geolocation failed: {{geolocationError}}
+				 								{{/unless}}
+
+		</div>
+</template>
+ -->
+
+<template name="filter">
+	{{#each status}}
+		<label>De garde:
+			<input type="checkbox" value="{{.}}" {{checked}} /> {{.}}
+		</label>
+	{{/each}}
+</template>
+<template name="count">
+{{commentsCount}}
+</template>
+<template name="priority">
+	{{priority}}
+</template>
+<template name="ArticleCount">
+{{ShopArticlesCount}}
+</template>

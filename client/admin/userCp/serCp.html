@@ -1,0 +1,168 @@
+<template name="userProfile">
+	 <div class="container">
+		 <!-- code start -->
+		 <!-- code end -->
+		 <div class="row">
+			 <div class="container " >
+				 	<br><br>
+				</div>
+			    <div class="ui page segment" style="font-family: 'Open Sans', sans-serif">
+						<!-- <div class="ui header montheme" style="border-radius:4px;" >
+ 						 <p style="color:#fff; padding: 18px 18px 20px; border-radius: 0px; font-family: 'Open Sans', sans-serif;">Espace utilisateur<small>...</small></p>
+ 			     </div> -->
+
+					 <div class="ui header"></div><h5><i class="user icon"></i> {{name}}'s Profile Page</h5>
+	          <div class="ui divider"></div>
+               <div class="container">
+
+									   <img align="left" class="fb-image-profile thumbnail" src="{{imageURL}}"
+										 style="height:4cm; width:4cm " alt="Profile image example"/><br>
+
+
+											<!--  -->
+											<div class="col-xs-12 ">
+
+														 <!-- Nav tabs -->
+														 <div class="card">
+														 <ul class="nav nav-tabs" role="tablist">
+																 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="pied piper icon"></i></a></li>
+																 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="tags icon"></i></a></li>
+																 <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="mail outline icon"></i></a></li>
+																 <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="settings icon"></i></a></li>
+														 </ul>
+
+														 <!-- Tab panes -->
+																		 <div class="tab-content">
+																			 <i class="pencil alternate icon"></i>
+																				 <div role="tabpanel" class="tab-pane active" id="home">
+																					 {{#if $.Session.get 'editMode'}}
+																					 <div class="ui container">
+														                  <br>
+																							<div class="ui header">
+
+																                <h4 class="ui horizontal divider header">
+																                    <i class="user icon"></i>
+																                    Update User's informations </h4>
+																              </div>
+														                  <div class=" ui form" id="changeProf">
+
+														                       <div class="three fields">
+														                         <div class="field">
+														                           <label>name</label>
+														                           <input type="text" class="form-control" name="usrname" id="usrname" value="{{profile.name}}" required/>
+														                         </div>
+														                         <div class="field">
+														                           <label>lastname</label>
+														                           <input type="text" name="usrlastname" class="form-control" id="usrlastname" value="{{profile.lastname}}" />
+														                         </div>
+														                         <div class="field">
+														                           <label>mobile</label>
+														                           <input type="text"  value="{{profile.mobile}}" class="form-control" name="usrmobile" id="usrmobile"/>
+														                         </div>
+														                       </div>
+														                       <div class="three fields">
+														                       <div class="field">
+														                         <label >occupation</label>
+														                         <input type="text" class="form-control" name="usroccupation" id="usroccupation" value="{{profile.occupation}}" />
+														                       </div>
+
+														                       <div class="field">
+														                         <label>birthday</label>
+														                         <input type="date" class="form-control" name="usrbirthday" id="usrbirthday" value="{{profile.birthday}}" />
+														                       </div>
+
+														                       </div>
+														                       <div class="two fields">
+														                       <div class="field">
+														                         <label >biography</label>
+														                         <textarea type="text" class="form-control" name="usrbio" id="usrbio" value="{{profile.bio}}"></textarea>
+														                       </div>
+														                       <div class="field">
+														                         <label >status</label>
+														                         <textarea type="text" class="form-control" name="usrstatus" id="usrstatus" value="{{profile.status}}" ></textarea>
+														                       </div>
+														                     </div>
+														                       <div class="ui blue segment">
+														                         <input type="submit" class="ui button" value="update" />
+														                       </div>
+														                    </div>
+														                 </div>
+																						 {{else}}
+																						 <div class="ui tertiary inverted segment">
+																								  <p>It's all good!</p>
+																								</div>
+																						 {{/if}}
+																					 </div>
+																				 <div role="tabpanel" class="tab-pane" id="profile">
+																					 <div class="fb-profile-text">
+									 													<h1>Rôle : {{role}}</h1>
+									 													<p>{{occupation}} - {{mobile}}</p>
+									 													<p>{{status}}</p>
+									 											</div></div>
+																				 <div role="tabpanel" class="tab-pane" id="messages">
+
+																					<div class="ui divider">
+
+																					</div>
+																					<div class="ui compact menu">
+																					  <a class="item"><i class="icon mail"></i> Messages <div class="floating ui red label">22</div>
+																					  </a>
+																					  <a class="item"><i class="icon users"></i> Friends <div class="floating ui teal label">22</div>
+																					  </a>
+																					</div>
+																					<!-- <div class="extra content">
+																						<div class="ui label"><i class="mail icon"></i> 23 </div>
+
+																					</div> -->
+																					 <!-- <div class="ui inverted segment">
+																									  <div class="ui inverted input">
+																									    <input type="text" placeholder="Search...">
+																									  </div>
+																									  <div class="ui inverted divider"></div>
+																									  <div class="ui inverted left icon input">
+																									    <input type="text" placeholder="Search...">
+																									    <i class="search icon"></i>
+																									  </div>
+																									  <div class="ui inverted divider"></div>
+																									  <div class="ui inverted transparent icon input">
+																									    <input type="text" placeholder="Search...">
+																									    <i class="search icon"></i>
+																									  </div>
+																									</div> -->
+																				 </div>
+																				<div role="tabpanel" class="tab-pane" id="settings">
+																					<div class="ui eight wide field myFileInput">
+																						<button class="ui button"><i class="upload icon"></i>
+																						<input type="file" class="form-control" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/></button>
+																							 <!-- <div class="ui form" action="#">
+																								 <div class="form-control myFileInput image-preview-input">
+
+																													 image-preview-clear button
+																													 <button  class="ui button  image-preview-clear" style="display:none;">
+																															 <span class="glyphicon glyphicon-remove"></span> Clear
+																													 </button>
+																												image-preview-input
+																													 <div class="ui button image-preview-input">
+																															 <span class="glyphicon glyphicon-folder-open"></span>
+																															 <span class="image-preview-input-title">Browse</span>
+																															 <input type="file" class="form-control" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+
+																													 </div>
+
+																									 <div class="file-path-wrapper">
+																										 <input class="ui button file-path validate" type="text">
+																									 </div>
+
+																								 </div>
+																					 </div> -->
+																		 </div>
+
+														 </div>
+													 </div>
+												 </div>
+											 </div>
+                  </div>
+            </div>
+        </div>
+			</div>
+	</template>

@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGO_URL": "mongodb+srv://Arsene:Jnmm_04101984@cluster0.bgt04et.mongodb.net/meteor?retryWrites=true&w=majority",
+    "ROOT_URL": "https://quickpharm-v1.herokuapp.com",
+    "PORT": "3000"
+  }
+}

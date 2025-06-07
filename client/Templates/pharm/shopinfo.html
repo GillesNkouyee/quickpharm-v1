@@ -1,0 +1,368 @@
+<template name="shopinfo">
+	<div class="ui container" >
+	<div class="ui stackable grid center" >
+
+		<div class="twelve wide stackable column infobox">
+
+			<div class="ui grid center  three wide column  " >
+				<div class="col-md-12">
+
+								<h2 class="h2-responsive"
+								style=" font-family: 'Open Sans', sans-serif;">
+								Bienvenue chez {{shopname}}!</h2>
+						<hr>
+						<!--Carousel Wrapper-->
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+
+						<div class="carousel-inner" role="listbox">
+
+							<div class="item active" >
+								{{#each shopitems}}
+								<img src="/cfs/files/articles/{{picture}}" alt="...">
+
+								<div class="carousel-caption">
+									<div class="Cards_open" style=" opacity:0.8">
+										<a href="#" class="btn btn-primary h5-responsive"  style=" padding: 10px 10px 20px; border-radius: 4px; font-family: 'Open Sans', sans-serif; ">
+											Inscrivez-vous et créez votre espace personnalisé!
+										</a>
+									</div>
+								</div>
+								{{/each}}
+							</div>
+
+						</div>
+
+
+						<!-- Controls -->
+						<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+
+						<!--/.Carousel Wrapper-->
+				</div>
+
+					<div class=" col-md-12 ">
+						<h3 style="color:darkgrey; padding: 20px 20px 0px; border-radius: 7px; font-family: 'Open Sans', sans-serif;">
+							Visitez notre espace  <small> discutez avec nous !</small></h3>
+
+
+						<div class="ui pointing secondary menu">
+						  <a class="active item" data-tab="first">Home</a>
+						  <a class="item" data-tab="second">Notre équipe</a>
+						  <a class="item" data-tab="third">Store</a>
+							<a class="item" data-tab="fourth">Ecrivez-nous</a>
+						</div>
+						<div class="ui active tab container" data-tab="first">
+							<div class="heading">
+								<h3 class="h3-responsive"><strong>Qui Sommes-nous?</strong></h3>
+								<p><h4><b>{{shopname}}</b></h4></p><br>
+									<p><h4><b>{{shopadress}}</b> --   Tel:{{shoptel}}</h4></p><br>
+										<p><h3><b>Pharmacien : </b></h3><h5><b>{{shopowner}}</b></h5></p>
+						</div>
+						</div>
+						<div class="ui tab container" data-tab="second">
+							<div class="heading">
+									<h3 class="h3-responsive"><strong>Notre équipe</strong></h3>
+									<p>Faites-vous servir par les meilleurs</p>
+							</div>
+
+								<div class="ui cards stackable grid ">
+									{{#each shopTeam}}
+										<div class="card team-members">
+											
+												<a class="olive card">
+													<div class="image">
+													  <img class="img-responsive" src="/cfs/files/articles/{{photo}}" alt="">
+													</div>
+												  </a>
+												  <h4>{{Nom}} {{Prenom}}</h4>
+												  <h4>{{Poste}}</h4>																						
+										</div>
+
+								{{/each}}
+							</div>
+
+						</div>
+						<div class="ui tab container" data-tab="third">
+						  {{> articlestore}}
+						</div>
+						<div class="ui tab container" data-tab="fourth">
+						  {{> email}}
+						</div>
+						</div>
+						<hr>
+
+				</div>
+	   </div>
+
+		 <div class="four wide  column shoplistbox">
+ 			<div class="column text-center">
+
+ 					<h4 style="color:darkgrey; padding: 8px 8px 0px; border-radius: 4px; font-family: 'Open Sans', sans-serif; ">
+ 						<span class="glyphicon glyphicon-fullscreen"></span>&nbsp;Adverts
+ 					</h4>
+ 					<hr/>
+ 					<div class="alert-message alert-message-info" >
+ 						<a href="#" class="btn btn-success h5-responsive"  style="opacity:0.7; padding: 10px 10px 20px; border-radius: 3px; font-family: 'Open Sans', sans-serif; ">
+ 							Join Us!
+ 						</a>
+ 					</div>
+
+ 			</div>
+ 			<hr>
+
+ 			<!--{{#if new_art}}-->
+ 		<div class="column text-center">
+ 			<div class="ui header ">
+ 					<h4 style="color:darkgrey; padding: 8px 8px 0px; border-radius: 4px; font-family: 'Open Sans', sans-serif; ">
+ 						<i class="options icon"></i>&nbsp;Gérez vos {{getGlobal 'stufftype'}}
+ 					</h4>
+ 				<hr>
+ 			</div>
+ 			<div class="panel-body">
+
+ 				<div class="error"></div>
+
+ 					{{#if isInRole 'admin,manager'}}
+ 						<a  class="btn btn-sm btn-outline-rounded btn-info {{updateZone}}" href="{{pathFor  route='EditShop'}}">click here</a>
+
+ 						{{else}}
+ 										<div class="alert-message alert-message-default" >
+ 											<h5>
+ 												Désolé, vous devez etre propriétaire pour modifier du contenu </h5>
+ 										</div>
+ 						{{/if}}
+ 		 </div>
+
+ 		 </div>
+ 		 <hr><br>
+ 			<div class="column">
+
+ 			 <div class="col-xs-12">
+ 						<div class="ui divider">
+
+ 						</div>
+ 				</div>
+ 		 </div>
+
+ 		</div>
+
+	 </div>
+	 <hr>
+	 <div class="ui stackable columns grid">
+
+		 <div class="infobox twelve wide column">
+			 <h4 style="color:#ccc; padding: 8px 8px 0px; border-radius: 4px; font-family: 'Open Sans', sans-serif; ">
+					<i class="comments icon"></i>&nbsp; Laissez vos impressions</h4><hr>
+				{{> SinglePost}}
+		 </div>
+		 <div class="loginbox four wide column">
+				 <div class="ui header" style="border-radius:4px;">
+						<h4 style="color:darkgrey; padding: 8px 8px 0px; border-radius: 4px; font-family: 'Open Sans', sans-serif; ">
+							 <i class="comments outline icon"></i>&nbsp; Disqus</h4>
+				 </div>
+				<hr>
+					{{#with userinfo}}
+						{{>SimpleChatWindow roomId="free room"  avatar=profile.avatar_url  limit=limit  username=profile.name
+						showViewed="true" showJoined= "true" publishChats=publishChats allow=allow}}
+
+					{{/ with}}
+
+
+			 </div>
+	 </div>
+
+ </div>
+
+<script>
+     $(document).ready(function() {
+        toastr.options.progressBar = true;
+         toastr.options.positionClass = "toast-top-full-width";
+     });
+
+</script>
+<script type="text/javascript">
+ $(function() {
+ $('#contact-form').bootstrapValidator({
+
+				 message: 'This value is not valid',
+				 feedbackIcons: {
+						 valid: 'glyphicon glyphicon-ok',
+						 invalid: 'glyphicon glyphicon-remove',
+						 validating: 'glyphicon glyphicon-refresh'
+				 },
+				 fields: {
+						 Name: {
+								 validators: {
+										 notEmpty: {
+												 message: 'The Name is required and cannot be empty'
+										 }
+								 }
+						 },
+						 email: {
+								 validators: {
+										 notEmpty: {
+												 message: 'The email address is required'
+										 },
+										 emailAddress: {
+												 message: 'The email address is not valid'
+										 }
+								 }
+						 },
+						 Message: {
+								 validators: {
+										 notEmpty: {
+												 message: 'The Message is required and cannot be empty'
+										 }
+								 }
+						 }
+				 }
+});
+});
+</script>
+</template>
+
+<template name="showarticle">
+	{{# each shoparticle}}
+	<div class="col-sm-6 col-md-4 text-center" id={{tag}}>
+
+			<div class="card">
+
+							  {{#if articleDeleteRights}}
+									<i class="remove icon articledel"></i>
+									{{/if}}
+			<div class="thumbnail ">
+				<img  class="item " src="{{url}}" alt="no picture available..." style=" height:5cm ;width:5cm " data-action="zoom">
+				<div class="for-border"><h5><span class="label left{{newshoparticle}}">New</span></h5></div>
+				<div class="producttitle">{{showbrand productid}}{{brand}}</div>
+		    <div class="for-border"></div>
+			</div>
+		</div>
+	</div>
+	{{/ each}}
+</template>
+
+			<!-- </div> -->
+
+
+			<!-- <nav>
+		    <ul class="pager">
+		      <li class="{{prevPageClass}}">
+		        <a id="prevPage" href="{{prevPage}}">
+		          <span aria-hidden="true">&larr;</span> Previous
+		        </a>
+		      </li>
+		      <li class="{{nextPageClass}}">
+		        <a id="nextPage" href="{{nextPage}}">
+		          Next <span aria-hidden="true">&rarr;</span>
+		        </a>
+		      </li>
+		    </ul>
+		  </nav> -->
+
+<template name="StoreSlider">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+	{{#with store}}
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+			{{#with shopitem}}
+      <img src="{{picture}}" alt="...">
+			{{/with}}
+      <div class="carousel-caption">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Create your Store</button>
+
+					<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+					  <div class="modal-dialog modal-lg" role="document">
+					    <div class="modal-content">
+					      ...
+					    </div>
+					  </div>
+					</div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="/6.jpg" alt="...">
+      <div class="carousel-caption">
+
+      </div>
+    </div>
+    ...
+  </div>
+	{{/with}}
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</template>
+<template name="email">
+	<article>
+{{#if done}}
+	<p>Email sent! Thank you for your interest in us.</p>
+			{{else}}
+<div class="ui form">
+	<form name="sentMessage" id="sentMessage" class="form horizontal">
+			<div class="row">
+					<div class="ui form col-md-6">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+									<input type="text"  placeholder="Your Name *" name="name" id="name" required data-validation-required-message="Please enter your name.">
+									<p class="help-block text-danger"></p>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+									<input  type="email"  placeholder="Your Email *" name="email" id="email" required data-validation-required-message="Please enter your email address.">
+									<p class="help-block text-danger"></p>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12">
+									<input type="tel"  placeholder="Your Phone *" name="phone" id="phone" required data-validation-required-message="Please enter your phone number.">
+									<p class="help-block text-danger"></p>
+							</div>
+					</div>
+					<div class="col-lg-12 col-md-9 col-sm-6 ">
+
+									<textarea  placeholder="Your Message *"  name="message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+									<p class="help-block text-danger"></p>
+
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-lg-12 text-center">
+							<div id="success"></div>
+							<button type="submit" id="sentMessage" class="ui button">Send Message</button>
+					</div>
+			</div>
+	</form>
+	<!-- <div class="comment-section">
+    {{> commentsBox id=documentId}}
+</div> -->
+</div>
+{{/if}}
+</article>
+</template>
+<!--  -->
