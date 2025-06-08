@@ -1,5 +1,5 @@
 {
-  "name": "QUICKPARM",
+  "name": "quickpharm",
   "private": true,
   "scripts": {
     "start": "meteor run"
